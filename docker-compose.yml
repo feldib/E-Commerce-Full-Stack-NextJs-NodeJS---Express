@@ -1,0 +1,64 @@
+name: react-node-ecommerce
+services:
+  server:
+    build: ./server
+    restart: always
+    environment:
+      PORT: 5000
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_USER: ${MYSQL_USER}
+      DB_PASSWORD: ${MYSQL_PASSWORD}
+      DB_NAME: ${MYSQL_DATABASE}
+      DB_CHARSET: ${DB_CHARSET}
+      CLIENT_HOST: http://localhost:${REACT_PORT} # As I am testing in the browser
+      SECRET_KEY: ${SECRET_KEY}
+      SESSION_SECRET: ${SESSION_SECRET}
+      SESSION_MAX_AGE: ${SESSION_MAX_AGE}
+      TRANSPORTER_SERVICE: ${TRANSPORTER_SERVICE}
+      TRANSPORTER_AUTH_USER: ${TRANSPORTER_AUTH_USER}
+      TRANSPORTER_AUTH_PASS: ${TRANSPORTER_AUTH_PASS}
+    ports:
+      - "${SERVER_PORT}:5000"
+    depends_on:
+      db:
+        condition: service_healthy
+  next-frontend:
+    build:
+      context: ./next-frontend
+      dockerfile: Dockerfile
+    ports:
+      - "${REACT_PORT}:3000"
+    environment:
+      PORT: 3000
+      NEXT_PUBLIC_SERVER_URL: http://localhost:${SERVER_PORT} # As I am testing in the browser
+    working_dir: /app
+    command: "npm run dev"
+    depends_on:
+      - server
+  db:
+    image: mysql:8
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    command:
+      [
+        "sh",
+        "-c",
+        "docker-entrypoint.sh mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --init-connect='SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci' & while ! mysqladmin ping -h localhost --silent; do sleep 1; done; echo 'MySQL DB container is ready!'; wait",
+      ]
+    ports:
+      - "${MYSQL_PORT}:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./migrations:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+volumes:
+  db_data:
