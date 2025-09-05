@@ -1,0 +1,6 @@
+[submodule "next-frontend"]
+	path = next-frontend
+	url = https://github.com/feldib/e_commerce_final_project.git
+[submodule "server"]
+	path = server
+	url = https://github.com/feldib/final_project_server.git
