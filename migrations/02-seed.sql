@@ -108,7 +108,7 @@ insert into categories (cname)
 values ("Sculpture");
 
 insert into artworks (title, artist_name, price, quantity, descript, category_id)
-values (  "Spring", "Boticelli", 3, 1, "
+values (  "Spring", "Botticelli", 3, 1, "
 Primavera (meaning 'Spring'), is a large panel painting in tempera paint by the Italian Renaissance painter Sandro Botticelli made in the late 1470s or early 1480s (datings vary). It has been described as one of the most written about, and most controversial paintings in the world, and also one of the most popular paintings in Western art
 ", 1);
 
@@ -125,7 +125,7 @@ insert into artwork_pictures(artwork_id, picture_path, is_thumbnail)
 values (1, "https://arthive.net/res/media/img/oy800/work/40a/271819.webp", false);
 
 insert into artworks (title, artist_name, price, quantity, descript, category_id)
-values (  "Mona Lisa", "Michelangelo", 66, 4, "
+values (  "Mona Lisa", "Leonardo da Vinci", 66, 4, "
 The painting has been definitively identified to depict Italian noblewoman Lisa del Giocondo. It is painted in oil on a white Lombardy poplar panel. Leonardo never gave the painting to the Giocondo family, and it is believed he later left it in his will to his favored apprentice Salaì. It was believed to have been painted between 1503 and 1506; however, Leonardo may have continued working on it as late as 1517. It was acquired by King Francis I of France and is now the property of the French Republic. It has been on permanent display at the Louvre in Paris since 1797.
 ", 1);
 
@@ -153,7 +153,7 @@ insert into artwork_pictures(artwork_id, picture_path, is_thumbnail)
 values (3, "https://i2.wp.com/zet.gallery/blog/wp-content/uploads/2016/02/Vicent-Van-Gogh-Starry-Night-Famous-Oil-Paintings-www.shairart.com_.jpg?fit=1280%2C1014", false);
 
 insert into artworks (title, artist_name, price, quantity, descript, category_id)
-values (  "Winter", "Breughel", 120, 94, "
+values (  "Winter", "Pieter Bruegel the Elder", 120, 94, "
 The Hunters in the Snow (Dutch: Jagers in de Sneeuw), also known as The Return of the Hunters, is a 1565 oil-on-wood painting by Pieter Bruegel the Elder. The Northern Renaissance work is one of a series of works, five of which still survive, that depict different times of the year. The painting is in the collection of the Kunsthistorisches Museum in Vienna, Austria. This scene is set in the depths of winter during December/January.
 ", 1);
 
@@ -189,7 +189,7 @@ insert into artwork_pictures(artwork_id, picture_path, is_thumbnail)
 values (7, "https://cdn.britannica.com/82/183382-050-D832EC3A/Detail-head-crown-Statue-of-Liberty-New.jpg", true);
 
 insert into artworks (title, artist_name, price, quantity, descript, category_id)
-values ( " Freedom Statue", "Kisfaludy-Stróbl", 666, 779,
+values ( "Freedom Statue", "Kisfaludy-Stróbl", 666, 779,
 "The Liberty Statue or Freedom Statue (Hungarian: Szabadság-szobor [ˈsɒbɒtt͡ʃaːɡ ˈsobor]) is a monument on the Gellért Hill in Budapest, Hungary. It commemorates those who sacrificed their lives for the independence, freedom, and prosperity of Hungary."
 , 2);
 
