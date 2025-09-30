@@ -101,11 +101,9 @@ insert into users (
 
 SELECT * FROM users;
 
-insert into categories (cname)
-values ("Oil Painting");
-
-insert into categories (cname)
-values ("Sculpture");
+INSERT INTO categories (cname_en, cname_he, cname_hu) VALUES 
+('Oil Painting', 'ציורי שמן', 'Olajfestmények'),
+('Sculpture', 'פסלים', 'Szobrok');
 
 insert into artworks (title, artist_name, price, quantity, descript, category_id)
 values (  "Spring", "Botticelli", 3, 1, "

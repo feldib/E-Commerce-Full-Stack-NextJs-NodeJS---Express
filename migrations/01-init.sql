@@ -20,7 +20,9 @@ alter table orders add foreign key (user_id) references users(id);
 
 create table categories (
   id integer AUTO_INCREMENT,
-  cname varchar(100),
+  cname_en varchar(100),
+  cname_he varchar(100),
+  cname_hu varchar(100),
   removed boolean default false,
   primary key (id)
 );
