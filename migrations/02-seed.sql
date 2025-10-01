@@ -496,7 +496,7 @@ values(
 	9,
     5,
     "Götz was truly talented. Even though he left us young, his artistic legacy lives on in pieces like this.",
-    true,
+    false,
     "Artistic legacy"
 );
 
@@ -555,6 +555,16 @@ values(
     "Ferenczy's influence on modern Hungarian painting cannot be overstated. A must-have for any serious collector.",
     true,
     "Essential for collectors"
+);
+
+-- Add unapproved review for testing
+insert into reviews (artwork_id, user_id, review_text, approved, title)
+values(
+	1,
+    3,
+    "This piece needs more vibrant colors in my opinion. The composition could be better too.",
+    false,
+    "Could be improved"
 );
 
 update artworks set removed = false;
