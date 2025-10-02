@@ -1,5 +1,9 @@
 -- Ensure UTF-8 for data insertion
-SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci;
+set NAMES utf8mb4 collate utf8mb4_unicode_ci;
+
+-- Insert categories first to satisfy foreign key constraints
+insert into categories (id, removed) values (1, false); 
+insert into categories (id, removed) values (2, false);
 
 insert into users (
     last_name,
