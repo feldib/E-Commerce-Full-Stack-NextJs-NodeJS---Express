@@ -12,7 +12,9 @@ This repository hosts a complete e-commerce web application composed of two main
 
 - **Redis Caching**: High-performance caching layer that significantly improves response times (93% faster for cached responses)
 - **Docker Orchestration**: Multi-service containerization with persistent data volumes
-- **Database Optimization**: MySQL 8 with UTF8MB4 character set for robust multilingual data storage
+- **Polyglot Persistence**:
+  - MySQL 8 with UTF8MB4 character set for primary data storage
+  - MongoDB for translation data and multilingual content storage
 
 ### Internationalization & Translation
 
@@ -32,7 +34,8 @@ The entire project is containerized using Docker Compose. The Docker Compose con
 
 - **Frontend Service**: Runs the Next.js application.
 - **Backend Service**: Runs the Node.js/Express server with Redis caching and DeepL translation.
-- **Database Service**: A MySQL 8 database used for persisting application data with UTF8MB4 character set and Unicode collation.
+- **MySQL Database Service**: A MySQL 8 database used for persisting core application data with UTF8MB4 character set and Unicode collation.
+- **MongoDB Service**: Document database used for storing translation data and multilingual content.
 - **Redis Service**: In-memory data store for high-performance caching and session management.
 
 Additionally, Docker volumes are utilized to persist database data and Redis cache between container restarts, ensuring data durability and optimal performance.
@@ -43,13 +46,21 @@ The Docker Compose configuration defines the following volumes to ensure data pe
 
 - **db_data**: Persists the MySQL 8 database files (`/var/lib/mysql`), ensuring that all data, tables, and migration history remain intact between container recreations.
 
+- **mongodb_data**: Persists MongoDB data (`/data/db`), maintaining translation collections and multilingual content across container restarts.
+
 - **server_public**: Stores the backend server's public assets (`/app/public`), including uploaded images and static files that need to be preserved across container restarts.
 
 - **redis_data**: Persists Redis cache data (`/data`), maintaining cached responses and session data across container restarts for optimal performance.
 
 ## Database Setup
 
-Database migrations (located in the `migrations/` folder) are used to initialize and seed the database. This ensures that the database schema is kept in sync with the application requirements.
+### MySQL
+
+Database migrations (located in the `migrations/` folder) are used to initialize and seed the MySQL database. This ensures that the relational database schema is kept in sync with the application requirements.
+
+### MongoDB
+
+MongoDB initialization scripts (located in the `mongo-init/` folder) are used to set up translation collections and seed initial multilingual content.
 
 ## How to Get Started
 
@@ -72,13 +83,17 @@ Database migrations (located in the `migrations/` folder) are used to initialize
 
    - **Frontend**: Navigate to `next-frontend` and run `npm install` followed by `npm run dev`.
    - **Backend**: Navigate to `server` and run `npm install` followed by `npm run dev`.
-   - **Database**: Set up your relational database as per the configurations in the `.env` files and run the migrations in the `migrations/` folder.
+   - **Databases**:
+     - Set up MySQL as per the configurations in the `.env` files and run the migrations in the `migrations/` folder.
+     - Set up MongoDB and run the initialization scripts in the `mongo-init/` folder.
 
 ## Technologies Used
 
 - **Frontend**: Next.js, React, TypeScript, i18n
 - **Backend**: Node.js, Express, TypeScript, REST & GraphQL APIs
-- **Database**: MySQL 8 with UTF8MB4 character set and Unicode collation for robust data storage and multilingual support
+- **Databases**:
+  - MySQL 8 with UTF8MB4 character set and Unicode collation for primary data storage
+  - MongoDB for storing translation data and multilingual content
 - **Caching**: Redis 7 for high-performance data caching and session management
 - **Translation**: DeepL API for automatic text translation across 30+ languages
 - **Containerization**: Docker Compose for multi-service orchestration and volume management
