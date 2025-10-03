@@ -18,11 +18,21 @@ services:
       TRANSPORTER_SERVICE: ${TRANSPORTER_SERVICE}
       TRANSPORTER_AUTH_USER: ${TRANSPORTER_AUTH_USER}
       TRANSPORTER_AUTH_PASS: ${TRANSPORTER_AUTH_PASS}
+      DEEPL_API_KEY: ${DEEPL_API_KEY}
+      ENABLE_REDIS: ${ENABLE_REDIS}
+      REDIS_URL: redis://redis:6379
+      MONGODB_URL: mongodb://mongodb:27017/translations
     ports:
       - "${SERVER_PORT}:5000"
+    volumes:
+      - server_public:/app/public
     depends_on:
       db:
         condition: service_healthy
+      redis:
+        condition: service_started
+      mongodb:
+        condition: service_started
   next-frontend:
     build:
       context: ./next-frontend
@@ -59,5 +69,30 @@ services:
       interval: 5s
       timeout: 5s
       retries: 10
+  redis:
+    image: redis:7-alpine
+    restart: always
+    ports:
+      - "${REDIS_PORT}:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+  mongodb:
+    image: mongo:7
+    restart: always
+    environment:
+      MONGO_INITDB_DATABASE: translations
+    ports:
+      - "${MONGODB_PORT}:27017"
+    volumes:
+      - mongodb_data:/data/db
+      - ./mongo-init:/docker-entrypoint-initdb.d
 volumes:
   db_data:
+  server_public:
+  redis_data:
+  mongodb_data:

@@ -1,5 +1,9 @@
 -- Ensure UTF-8 for data insertion
-SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci;
+set NAMES utf8mb4 collate utf8mb4_unicode_ci;
+
+-- Insert categories first to satisfy foreign key constraints
+insert into categories (id, removed) values (1, false); 
+insert into categories (id, removed) values (2, false);
 
 insert into users (
     last_name,
@@ -101,11 +105,6 @@ insert into users (
 
 SELECT * FROM users;
 
-insert into categories (cname)
-values ("Oil Painting");
-
-insert into categories (cname)
-values ("Sculpture");
 
 insert into artworks (title, artist_name, price, quantity, descript, category_id)
 values (  "Spring", "Botticelli", 3, 1, "
@@ -358,7 +357,7 @@ values(12, 1);
 insert into artwork_tags(artwork_id, tag_id)
 values(12, 1);
 
-
+-- Reviews for Spring (artwork_id: 1)
 insert into reviews (artwork_id, user_id, review_text, approved, title)
 values(
 	1,
@@ -375,6 +374,198 @@ values(
     "To be honest, I don't understand what was all the fuss for, I don't think this is anything out of the ordinary.. It is a waste of money if you ask me...",
     true,
     "B-"
+);
+
+-- Reviews for Mona Lisa (artwork_id: 2)
+insert into reviews (artwork_id, user_id, review_text, approved, title)
+values(
+	2,
+    3,
+    "A masterpiece! The enigmatic smile is even more captivating in person. Worth every penny.",
+    true,
+    "Absolutely stunning!"
+);
+
+insert into reviews (artwork_id, user_id, review_text, approved, title)
+values(
+	2,
+    4,
+    "Overrated in my opinion. Yes, it's famous, but I've seen more impressive works for much less money.",
+    true,
+    "Not worth the hype"
+);
+
+-- Reviews for Wedding (artwork_id: 3)
+insert into reviews (artwork_id, user_id, review_text, approved, title)
+values(
+	3,
+    5,
+    "Chagall's emotional depth really shines through in this piece. The story behind it makes it even more powerful.",
+    true,
+    "Emotionally moving"
+);
+
+insert into reviews (artwork_id, user_id, review_text, approved, title)
+values(
+	3,
+    1,
+    "Beautiful use of color and composition. You can feel the love and loss in every brushstroke.",
+    true,
+    "Breathtaking artwork"
+);
+
+-- Reviews for Winter (artwork_id: 4)
+insert into reviews (artwork_id, user_id, review_text, approved, title)
+values(
+	4,
+    2,
+    "The detail in this winter scene is incredible. You can almost feel the cold! Great addition to any collection.",
+    true,
+    "Amazing detail"
+);
+
+-- Reviews for New Artwork (artwork_id: 5)
+insert into reviews (artwork_id, user_id, review_text, approved, title)
+values(
+	5,
+    3,
+    "Interesting modern interpretation. The philosophical influence is clear and thought-provoking.",
+    true,
+    "Thought-provoking piece"
+);
+
+insert into reviews (artwork_id, user_id, review_text, approved, title)
+values(
+	5,
+    4,
+    "Great value for money! Perfect for someone starting their art collection.",
+    true,
+    "Great starter piece"
+);
+
+-- Reviews for The Thinker (artwork_id: 6)
+insert into reviews (artwork_id, user_id, review_text, approved, title)
+values(
+	6,
+    5,
+    "A classic that never gets old. The pose perfectly captures deep contemplation and philosophy.",
+    true,
+    "Timeless classic"
+);
+
+insert into reviews (artwork_id, user_id, review_text, approved, title)
+values(
+	6,
+    1,
+    "Excellent reproduction quality. The bronze finish is beautifully done.",
+    true,
+    "Quality craftsmanship"
+);
+
+-- Reviews for Statue of Liberty (artwork_id: 7)
+insert into reviews (artwork_id, user_id, review_text, approved, title)
+values(
+	7,
+    2,
+    "A symbol of freedom and hope. Expensive but truly iconic. Perfect centerpiece for any collection.",
+    true,
+    "Iconic masterpiece"
+);
+
+-- Reviews for Freedom Statue (artwork_id: 8)
+insert into reviews (artwork_id, user_id, review_text, approved, title)
+values(
+	8,
+    3,
+    "Beautiful Hungarian heritage piece. The symbolism is powerful and the craftsmanship is excellent.",
+    true,
+    "Hungarian pride"
+);
+
+insert into reviews (artwork_id, user_id, review_text, approved, title)
+values(
+	8,
+    4,
+    "Great historical significance. Love having a piece that represents Hungarian freedom and independence.",
+    true,
+    "Historical treasure"
+);
+
+-- Reviews for Legend (artwork_id: 9)
+insert into reviews (artwork_id, user_id, review_text, approved, title)
+values(
+	9,
+    5,
+    "Götz was truly talented. Even though he left us young, his artistic legacy lives on in pieces like this.",
+    false,
+    "Artistic legacy"
+);
+
+insert into reviews (artwork_id, user_id, review_text, approved, title)
+values(
+	9,
+    1,
+    "The attention to detail is remarkable. You can see why he was considered one of the best of his time.",
+    true,
+    "Remarkable detail"
+);
+
+-- Reviews for János Götz sculpture (artwork_id: 10)
+insert into reviews (artwork_id, user_id, review_text, approved, title)
+values(
+	10,
+    2,
+    "A touching tribute from daughter to father. The emotional connection makes this piece even more special.",
+    true,
+    "Touching tribute"
+);
+
+-- Reviews for Ferenc Molnár (artwork_id: 11)
+insert into reviews (artwork_id, user_id, review_text, approved, title)
+values(
+	11,
+    3,
+    "Molnár was such an important figure in Hungarian literature. This sculpture captures his essence perfectly.",
+    true,
+    "Literary legend captured"
+);
+
+insert into reviews (artwork_id, user_id, review_text, approved, title)
+values(
+	11,
+    4,
+    "Johanna Götz really knows how to honor great figures. The sculpture technique is superb.",
+    true,
+    "Masterful technique"
+);
+
+-- Reviews for Self-portrait (artwork_id: 12)
+insert into reviews (artwork_id, user_id, review_text, approved, title)
+values(
+	12,
+    5,
+    "The father of Hungarian impressionism! This self-portrait shows his incredible skill and self-awareness as an artist.",
+    true,
+    "Impressionist master"
+);
+
+insert into reviews (artwork_id, user_id, review_text, approved, title)
+values(
+	12,
+    1,
+    "Ferenczy's influence on modern Hungarian painting cannot be overstated. A must-have for any serious collector.",
+    true,
+    "Essential for collectors"
+);
+
+-- Add unapproved review for testing
+insert into reviews (artwork_id, user_id, review_text, approved, title)
+values(
+	1,
+    3,
+    "This piece needs more vibrant colors in my opinion. The composition could be better too.",
+    false,
+    "Could be improved"
 );
 
 update artworks set removed = false;
