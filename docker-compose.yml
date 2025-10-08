@@ -11,7 +11,7 @@ services:
       DB_PASSWORD: ${MYSQL_PASSWORD}
       DB_NAME: ${MYSQL_DATABASE}
       DB_CHARSET: ${DB_CHARSET}
-      CLIENT_HOST: http://localhost:${REACT_PORT} # As I am testing in the browser
+      CLIENT_HOST: ${FRONTEND_URL} # For CORS issues
       SECRET_KEY: ${SECRET_KEY}
       SESSION_SECRET: ${SESSION_SECRET}
       SESSION_MAX_AGE: ${SESSION_MAX_AGE}
